@@ -15,3 +15,8 @@ local.properties
 
 # 发布包不进仓库，走 Release 附件
 *.apk
+
+# 个人备注与发布草稿不进仓库
+/发布到GitHub-手动操作.md
+/发布说明-*.md
+/测试报告-*.md
