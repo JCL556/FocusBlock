@@ -41,13 +41,39 @@
 
 ---
 
-## 之后改代码怎么更新
+## 之后怎么更新
 
-1. 改完代码，GitHub Desktop 里写好 Summary（一句话说明改了什么），点 `Commit to main`
-2. 点右上 `Push origin`
-3. 要发新包就跑一次 `./gradlew assembleDebug`，然后重复第四步，tag 换成 `v1.7.8`
+分两种，只有第二种要发新包。远端仓库是 `JCL556/FocusBlock`，分支 `main`。
 
-一个版本一个 tag，别复用旧 tag。同一个 Release 后面发现传错了包，可以点 `Edit` 删附件重传。
+### A　只改文档（README / CHANGELOG）
+
+1. 改完存盘
+2. GitHub Desktop 里左边看 `Changes`，右下角 Summary 写一句话（例如「修文案」）
+3. 点 `Commit to main`，再点右上 `Push origin`
+4. 网页刷新就生效，不用发 Release
+
+### B　改了代码，要发新版本
+
+1. `app/build.gradle.kts` 里 `versionCode` 加一，`versionName` 跟着改成 1.7.8（不升也能覆盖安装，但升了才分得清谁是谁）
+2. 打包：`./gradlew assembleDebug`
+3. 产物改名 `FocusBlock-1.7.8.apk`，放 `preview/` 或桌面，**不要放进仓库目录**
+4. 文档跟上：README 顶部版本号、`## 版本历史` 加一行；`CHANGELOG.md` 顶部加一节
+5. 同样 Commit → Push
+
+### C　挂 Release（每次发新包都要做）
+
+1. 网页打开仓库 → 右侧 `Releases` → `Draft a new release`
+2. `Choose a tag` 输入 `v1.7.8`，点 `Create new tag: v1.7.8 on publish`；Target 选 `main`
+3. 标题写 `FocusBlock 1.7.8`，说明框粘贴 `发布说明-v1.7.8.md` 的内容
+4. 下方 `Attach binaries…` 把 apk 拖进去，等传完
+5. 点绿色 `Publish release`
+
+几条规矩：
+
+- 一个版本一个 tag，别复用旧 tag
+- 传错包了：进那个 Release 点 `Edit`，删掉附件重传，tag 不用动
+- 别 force push，别改历史
+- 旧 apk 永远不进仓库（`.gitignore` 已经排了 `*.apk`）
 
 ---
 
