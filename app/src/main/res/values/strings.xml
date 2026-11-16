@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">FocusBlock</string>
+    <!-- 通知头一行显示的名字：系统里已经叫 FocusBlock 了，通知里用中文更好认 -->
+    <string name="notif_app_name">番茄提醒</string>
+    <string name="channel_alarm_name">作息提醒</string>
+    <string name="channel_alarm_desc">时间块到点时提醒你该做事了</string>
+    <string name="notif_start_head">该开始了</string>
+    <string name="notif_end_head">该收尾了</string>
+    <string name="notif_start_hint">点「开始」记下这一刻</string>
+    <string name="notif_end_hint">点「结束」就算这一场完成</string>
+    <string name="notif_rest_head">去休息一下</string>
+    <string name="notif_focus_end_head">专注结束</string>
+    <string name="notif_focus_end_body">「%1$s」这一轮走完了，站起来歇会儿</string>
+    <string name="notif_break_end_head">休息结束</string>
+    <string name="notif_break_end_body">休息够了，回来接着专注</string>
+    <string name="action_start">开始</string>
+    <string name="action_end">结束</string>
+    <string name="action_done">完成</string>
+</resources>
