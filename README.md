@@ -4,7 +4,8 @@
 
 - minSdk 30 / targetSdk 35 / compileSdk 35
 - 包名 `io.github.xiaoxia.focusblock`
-- 版本 1.7.6（versionCode 23）
+- 版本 1.7.7（versionCode 24）
+- 已发布包：`FocusBlock-1.7.7.apk`（调试签名，自用 / 内测；正式分发请自行换 release 密钥重签）
 
 ## 构建
 
@@ -90,6 +91,15 @@
 3. **版本号**升到 1.3.0 / versionCode 5。
 
 预览图：`preview/v130.png`（源 `preview/v130.html`）。单测补了 6 条（新建即过点、未到点、进行中、时间点、停用、已完成），总数 34 条。
+
+## 第二十七轮改动（v1.7.7）：补回每日重排广播，连续两天不开 App 也不掉提醒
+
+1. **真 bug**：`Scheduler` 每天 00:05 会发一条 `ACTION_DAILY` 给自己的 `DailyReceiver`，用来把闹钟往后推一天。但 `DailyReceiver` 漏了在 `AndroidManifest.xml` 里注册——代码写了、清单没有，这条广播永远送不到。
+2. **后果**：闹钟只排**未来 48 小时**。装上后两天内不打开 App，窗口就滑空了，之后所有到点提醒全部失效，必须手动进一次 App 才会重新排。
+3. **改法**：清单补一行 `<receiver android:name=".notify.DailyReceiver" android:exported="false" />`。行为不变，只是这条路真正通了。
+4. **顺带对齐文案**：`Receivers.kt` 里那句「同一时刻的多个块已合并、一次弹一条」是旧逻辑的注释，现在是一块一条闹钟、同刻两块就是两条通知；说明书第九节「到点才响：不提前，也不延后」也改回「到点即响」。
+
+**版本号**升到 1.7.7 / versionCode 24。单测 87 条全绿。已打包 `FocusBlock-1.7.7.apk`（调试签名，27 MB）。
 
 ## 第二十六轮改动（v1.7.6）：冷启动不再闪一下空白作息
 

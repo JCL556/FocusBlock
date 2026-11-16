@@ -12,3 +12,6 @@ local.properties
 /app/build/
 *.jks
 *.keystore
+
+# 发布包不进仓库，走 Release 附件
+*.apk

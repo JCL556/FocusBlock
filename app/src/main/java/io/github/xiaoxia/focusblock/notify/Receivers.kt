@@ -30,7 +30,7 @@ internal fun BroadcastReceiver.runAsync(block: suspend () -> Unit) {
 }
 
 /**
- * 到点提醒。同一时刻的多个块已在排布时合并，这里一次弹一条通知。
+ * 到点提醒。排布时一块一条闹钟，同刻有两个块就是两条通知；这里按 id 列表逐个弹。
  * kind = start 提醒「该开始了」，kind = end 提醒「该收尾了」。
  */
 class AlarmReceiver : BroadcastReceiver() {
